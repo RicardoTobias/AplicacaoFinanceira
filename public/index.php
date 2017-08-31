@@ -32,8 +32,9 @@ $app->plugin(new AuthPlugin());
 
 //
 $app->get('/', function(RequestInterface $request) use($app) {
-    $view = $app->service('view.renderer');
-    return $view->render('test.html.twig', ['name' => 'Ricardo']);
+    $response = new Response();
+    $response->getBody()->write('response com emitter do diactoros');
+    return $response;
 });
 
 //
