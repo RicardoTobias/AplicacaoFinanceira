@@ -29,8 +29,8 @@ $app
                     $data['password'] = $auth->hashPassword($data['password']);
                     $repository->create($data);
                     return $app->redirect('/users');
-            }, 'users.store'
-        )
+                }, 'users.store'
+            )
         ->get(
             '/users/{id}/edit', function (ServerRequestInterface $request) use ($app) {
                 $view = $app->service('view.renderer');
@@ -49,7 +49,7 @@ $app
                     $repository = $app->service('user.repository');
                     $id = $request->getAttribute('id');
                     $data = $request->getParsedBody();
-                    if(isset($data['password'])){
+                    if(isset($data['password'])) {
                         unset($data['password']);
                     }
                     $repository->update($id, $data);

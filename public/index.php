@@ -1,4 +1,20 @@
 <?php
+/**
+ * PHP version 7.1
+ *
+ * @category  Financial_Apllication
+ * @package   RTW_System
+ * @author    Ricardo Tobias <ricardosantostobias@yahoo.com.br>
+ * @copyright 2017 Ricardo Tobias Ltd
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @link      https://cryptic-hollows-97873.herokuapp.com Heroku Application
+ */
+
+//
+$filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
+if (php_sapi_name() === 'cli-server' && is_file($filename)) {
+    return false;
+}
 
 //
 use Psr\Http\Message\ServerRequestInterface;
@@ -31,18 +47,22 @@ $app->plugin(new DbPlugin());
 $app->plugin(new AuthPlugin());
 
 //
-$app->get('/', function(RequestInterface $request) use($app) {
-    $response = new Response();
-    $response->getBody()->write('response com emitter do diactoros');
-    return $response;
-});
+$app->get(
+    '/', function (RequestInterface $request) use ($app) {
+        $response = new Response();
+        $response->getBody()->write('response com emitter do diactoros');
+        return $response;
+    }
+);
 
 //
-$app->get('/home/{name}/{id}', function(ServerRequestInterface $request) {
-    $response = new Response();
-    $response->getBody()->write('response com emitter do diactoros');
-    return $response;
-});
+$app->get(
+    '/home/{name}/{id}', function (ServerRequestInterface $request) {
+        $response = new Response();
+        $response->getBody()->write('response com emitter do diactoros');
+        return $response;
+    }
+);
 
 //
 require_once __DIR__ . '/../src/controllers/category-costs.php';

@@ -1,58 +1,67 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Ver conta a pagar
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('bill-pays.edit',{'id': bill.id}) }}"
-                               class="btn btn-primary">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                            <a href="{{ route('bill-pays.delete',{'id': bill.id}) }}"
-                               class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                        </div>
+    <div class="col-md-12 no-padding">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4><i class="fa fa-list" aria-hidden="true"></i> Ver conta a pagar</h4>
                     </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">#</th>
-                                        <td>{{ bill.id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Categoria de Custo</th>
-                                        <td>{{ bill.categoryCost.name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Data lanç.</th>
-                                        <td>{{ bill.date_launch | date('d/m/Y') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Nome</th>
-                                        <td>{{ bill.name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Valor</th>
-                                        <td>{{ bill.value | number_format(2,',','.') }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="col-xs-6 text-right">
+                        <ol class="breadcrumb">
+                            <li><a href="{{ route('bill-pays.list') }}"><i class="fa fa-backward" aria-hidden="true"></i> Voltar - Contas à pagar</a></li>
+                        </ol>
                     </div>
                 </div>
             </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">#</th>
+                                    <td>{{ bill.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Categoria de Custo</th>
+                                    <td>{{ bill.categoryCost.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Data lanç.</th>
+                                    <td>{{ bill.date_launch | date('d/m/Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Nome</th>
+                                    <td>{{ bill.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Valor</th>
+                                    <td>{{ bill.value | number_format(2,',','.') }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ação</th>
+                                    <td>
+                                        <div class="col-md-6">
+                                            <a href="{{ route('bill-pays.edit',{'id': bill.id}) }}"class="btn btn-primary col-md-12">
+                                                <span class="fa fa-pencil"></span> Editar
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <a href="{{ route('bill-pays.delete',{'id': bill.id}) }}"class="btn btn-danger col-md-12">
+                                                <span class="fa fa-trash"></span> Excluir?
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

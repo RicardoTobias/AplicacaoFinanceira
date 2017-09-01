@@ -1,24 +1,48 @@
-<form method="post" action="{{ action }}">
-    <div class="form-group">
-        <label class="control-label">Primeiro nome</label>
-        <input class="form-control" type="text" placeholder="Primeiro nome" name="first_name" value="{{ user.first_name }}">
+<form class="form" method="post" action="{{ action }}">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="control-group">
+                <label class="control-label">Primeiro nome</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Primeiro nome" name="first_name" value="{{ user.first_name }}">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="control-group">
+                <label class="control-label">Email</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Email" name="email" value="{{ user.email }}">
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label class="control-label">Último nome</label>
-        <input class="form-control" type="text" placeholder="Último nome" name="last_name" value="{{ user.last_name }}">
-    </div>
-    <div class="form-group">
-        <label class="control-label">Email</label>
-        <input class="form-control" type="text" placeholder="Email" name="email" value="{{ user.email }}">
-    </div>
+
     {% if user.id is null %}
-        <div class="form-group">
-            <label class="control-label">Password</label>
-            <input class="form-control" type="password" placeholder="Senha" name="password">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="control-group">
+                    <label class="control-label">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-bookmark"></i>
+                        </div>
+                        <input class="form-control" type="password" placeholder="Senha" name="password">
+                    </div>
+                </div>
+            </div>
         </div>
     {% endif %}
+
     <button type="submit" class="btn btn-primary btn-block">
-        <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
+        <span class="fa fa-{{ submitIcon }}"></span>
     </button>
 </form>
 

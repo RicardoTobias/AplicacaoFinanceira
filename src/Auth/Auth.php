@@ -1,57 +1,134 @@
 <?php
 
+/**
+ * Financial Apllication
+ * 
+ * PHP version 7.1
+ *
+ * @category  Financial_Apllication
+ * @package   RTW_System
+ * @author    Ricardo Tobias <ricardosantostobias@yahoo.com.br>
+ * @copyright 2017 Ricardo Tobias Ltd
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @link      https://cryptic-hollows-97873.herokuapp.com Financial Application
+ */
 declare(strict_types = 1);
 namespace SONFin\Auth;
 
 use SONFin\Models\UserInterface;
 
+/**
+ * Auth Class implementing AuthInterface
+ * 
+ * @category  Financial_Apllication
+ * @package   RTW_System
+ * @author    Ricardo Tobias <ricardosantostobias@yahoo.com.br>
+ * @copyright 2017 Ricardo Tobias Ltd
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @link      https://cryptic-hollows-97873.herokuapp.com Financial Application
+ */
 class Auth implements AuthInterface
 {
+    /**
+     * Private variable
+     * 
+     * @var $_jasnyAuth
+     */
+    private $_jasnyAuth;
 
     /**
-     * @var JasnyAuth
+     * __construct
+     *
+     * @param array JasnyAuth $_jasnyAuth Implemeting anothers function
+     * 
+     * @access public 
+     * 
+     * @return bool
      */
-    private $jasnyAuth;
-
-    // Chamando o método sessionStart() no construtor
-    public function __construct(JasnyAuth $jasnyAuth) 
+    public function __construct(JasnyAuth $_jasnyAuth)
     {
-        $this->jasnyAuth = $jasnyAuth;
+        $this->_jasnyAuth = $_jasnyAuth;
         $this->sessionStart();
     }
 
-    public function login(array $credentials): bool 
+    /**
+     * Login
+     *
+     * @param array $credentials Login credentials
+     * 
+     * @access public 
+     * 
+     * @return bool
+     */
+    public function login(array $credentials): bool
     {
         list('email' => $email, 'password' => $password) = $credentials;
-        return $this->jasnyAuth->login($email, $password) !== null;
+        return $this->_jasnyAuth->login($email, $password) !== null;
     }
 
-    public function check(): bool 
+    /**
+     * Check
+     *
+     * @access public 
+     * 
+     * @return bool
+     */
+    public function check(): bool
     {
         return $this->user() !== null;
     }
 
-    public function logout(): void 
+    /**
+     * Logout
+     *
+     * @access public 
+     * 
+     * @return void
+     */
+    public function logout(): void
     {
-        $this->jasnyAuth->logout();
+        $this->_jasnyAuth->logout();
     }
 
-    public function hashPassword(string $password): string 
+    /**
+     * Hash Password
+     *
+     * @param string $password Password to credetials users
+     * 
+     * @access public 
+     * 
+     * @return string
+     */
+    public function hashPassword(string $password): string
     {
-        return $this->jasnyAuth->hashPassword($password);
+        return $this->_jasnyAuth->hashPassword($password);
     }
 
     // Criando o método sessionStart() ao final da classe
-    protected function sessionStart() 
+    /**
+     * Session start
+     *
+     * @access public 
+     * 
+     * @return bool
+     */
+    protected function sessionStart()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }
 
+    /**
+     * User
+     *
+     * @access public 
+     * 
+     * @return bool
+     */
     public function user(): ?UserInterface
     {
-        return $this->jasnyAuth->user();
+        return $this->_jasnyAuth->user();
     }
 
 }

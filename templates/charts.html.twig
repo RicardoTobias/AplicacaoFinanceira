@@ -1,35 +1,54 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Gráfico de gastos
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <form class="form-inline text-center" method="get" action="{{ route('charts.list') }}">
-                        <div class="form-group">
-                            <label class="control-label">Início</label>
-                            <input class="form-control" type="text" placeholder="DD/MM/YYY"
-                                   name="date_start" value="{{ 'now'|date_modify('-1 month')|date('d/m/Y') }}">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Fim</label>
-                            <input class="form-control" type="text" placeholder="DD/MM/YYY"
-                                   name="date_end" value="{{ 'now'|date('d/m/Y') }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </form>
-                    <div id="chart-div"></div>
+    <div class="col-md-12 no-padding">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4><i class="fa fa-list" aria-hidden="true"></i> Gráfico de gastos</h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="panel-body">
+        <h3 class="text-justify">Selecione o período para exibir o gráfico</h3><br>
+        <form class="form-inline" method="get" action="{{ route('statements.list') }}">
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label>Selecione a data inicial</label><br>
+                    <div class="input-group col-md-12">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="fa fa-calendar" aria-hidden="true"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="DD/MM/YYYY" name="date_start" value="{{ 'now'|date_modify('-1 month')|date('d/m/Y') }}">
+                    </div>
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Selecione a data final</label><br>
+                    <div class="input-group col-md-12">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="fa fa-calendar" aria-hidden="true"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="DD/MM/YYYY" name="date_end" value="{{ 'now'|date('d/m/Y') }}">
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>&nbsp;</label><br>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="fa fa-search"></span> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="chart-div"></div>
+    </div>
+
 {% endblock %}
 
 {% block scripts %}

@@ -1,4 +1,16 @@
 <?php
+/** 
+ * Comentário de cabeçalho de arquivos
+ * Esta classe de upload de fotos
+ *
+ * @author     leo genilhu <leo@genilhu.com>
+ * @version    0.1 
+ * @copyright  GPL © 2006, genilhu ltda. 
+ * @access     public  
+ * @package    Infra_Estrutura 
+ * @subpackage UploadGenilhu
+ * @example    Classe uploadGenilhu. 
+ */ 
 
 declare(strict_types = 1);
 
@@ -13,19 +25,50 @@ use Zend\Diactoros\Response\RedirectResponse;
 class Application
 {
 
+    /** 
+     * Comentário de variáveis
+     * Variável recebe o diretório para gravar as fotos. 
+     *
+     * @access private 
+     * @name   $diretorio 
+     */ 
     private $serviceContainer;
     private $_befores = [];
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function __construct(ServiceContainerInterface $serviceContainer) 
     {
         $this->serviceContainer = $serviceContainer;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function service($name) 
     {
         return $this->serviceContainer->get($name);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function addService(string $name, $service): void 
     {
         if (is_callable($service)) {
@@ -35,11 +78,27 @@ class Application
         }
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function plugin(PluginInterface $plugin): void 
     {
         $plugin->register($this->serviceContainer);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function get($path, $action, $name = null): Application 
     {
         $routing = $this->service('routing');
@@ -48,6 +107,14 @@ class Application
         return $this;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function post($path, $action, $name = null): Application 
     {
         $routing = $this->service('routing');
@@ -56,11 +123,27 @@ class Application
         return $this;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function redirect($path) 
     {
         return new RedirectResponse($path);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function route(string $name, array $params = []) 
     {
         $generator = $this->service('routing.generator');
@@ -68,12 +151,28 @@ class Application
         return $this->redirect($path);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function before(callable $callback): Application 
     {
         array_push($this->_befores, $callback);
         return $this;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     protected function runBefores(): ?ResponseInterface 
     {
         foreach ($this->_befores as $callback) {
@@ -85,6 +184,14 @@ class Application
         return null;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     public function start(): void 
     {
         $route = $this->service('route');
@@ -109,6 +216,14 @@ class Application
         $this->emitResponse($response);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @access public 
+     * @param  String $imagem_nome
+     * @param  String $diretorio
+     * @return void 
+     */ 
     protected function emitResponse(ResponseInterface $response) 
     {
         $emitter = new SapiEmitter();

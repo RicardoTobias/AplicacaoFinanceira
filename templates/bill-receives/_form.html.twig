@@ -1,20 +1,45 @@
-<form method="post" action="{{ action }}">
-    <div class="form-group">
-        <label class="control-label">Data de Lançamento</label>
-        <input class="form-control" type="text" placeholder="DD/MM/YYYY"
-               name="date_launch" value="{{ bill.date_launch | date('d/m/Y') }}">
+<form class="form" method="post" action="{{ action }}">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="control-group">
+                <label class="control-label">Data de Lançamento</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <input class="form-control" type="text" placeholder="DD/MM/YYYY" name="date_launch" value="{{ bill.date_launch | date('d/m/Y') }}">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="control-group">
+                <label class="control-label">Nome</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Nome" name="name" value="{{ bill.name }}">
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label class="control-label">Nome</label>
-        <input class="form-control" type="text" placeholder="Nome"
-               name="name" value="{{ bill.name }}">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="control-group">
+                <label class="control-label">Valor</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-barcode"></i>
+                    </div>
+                    <input class="form-control" type="text" placeholder="0.000,00" name="value" value="{{ bill.value | number_format(2,',','.') }}">
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label class="control-label">Valor</label>
-        <input class="form-control" type="text" placeholder="0.000,00"
-               name="value" value="{{ bill.value | number_format(2,',','.') }}">
-    </div>
+
     <button type="submit" class="btn btn-primary btn-block">
-        <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
+        <span class="fa fa-{{ submitIcon }}"></span>
     </button>
 </form>

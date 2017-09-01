@@ -1,20 +1,27 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Editar conta a pagar
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    {% set action = route('bill-pays.update', {'id': bill.id}) %}
-                    {% set submitIcon = 'pencil' %}
-                    {% include 'bill-pays/_form.html.twig' %}
+    <div class="col-md-12 no-padding">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4><i class="fa fa-list" aria-hidden="true"></i> Nova conta a pagar</h4>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <ol class="breadcrumb">
+                            <li><a href="{{ route('bill-pays.list') }}"><i class="fa fa-bookmark" aria-hidden="true"></i> Contas à pagar</a></li>
+                            <li class="active"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
+            <div class="panel-body">
+                {% set action = route('bill-pays.update', {'id': bill.id}) %}
+                    {% set submitIcon = 'pencil' %}
+                    {% include 'bill-pays/_form.html.twig' %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
