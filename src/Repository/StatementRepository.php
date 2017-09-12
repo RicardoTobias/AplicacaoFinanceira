@@ -29,12 +29,28 @@ use SONFin\Models\BillReceive;
 class StatementRepository implements StatementRepositoryInterface
 {
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @param string $dateStart Start date
+     * @param string $dateEnd   End date
+     * @param int    $userId    User's id
+     * 
+     * @access public
+     * 
+     * @return string 
+     */ 
     public function all(string $dateStart, string $dateEnd, int $userId): array 
     {
         //select from bill_pays left join category_costs
         $billPays = BillPay::query()
                 ->selectRaw('bill_pays.*, category_costs.name as category_name')
-                ->leftJoin('category_costs', 'category_costs.id', '=', 'bill_pays.category_cost_id')
+                ->leftJoin(
+                    'category_costs', 
+                    'category_costs.id', 
+                    '=', 
+                    'bill_pays.category_cost_id'
+                )
                 ->whereBetween('date_launch', [$dateStart, $dateEnd])
                 ->where('bill_pays.user_id', $userId)
                 ->get();
@@ -47,7 +63,12 @@ class StatementRepository implements StatementRepositoryInterface
         //$billPays -> Collection [0 => BillPay, 1 => BillPay..]
         //$billReceives -> Collection [0 => BillReceive,1 => BillReceive..]
 
-        $collection = new Collection(array_merge_recursive($billPays->toArray(), $billReceives->toArray()));
+        $collection = new Collection(
+            array_merge_recursive(
+                $billPays->toArray(), 
+                $billReceives->toArray()
+            )
+        );
         $statements = $collection->sortByDesc('date_launch');
         return [
             'statements' => $statements,

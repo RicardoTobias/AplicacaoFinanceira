@@ -36,5 +36,9 @@ interface CategoryCostRepositoryInterface extends RepositoryInterface
      * 
      * @return array
      */
-    public function sumByPeriod(string $dateStart, string $dateEnd, int $userId): array;
+    public function sumByPeriod(
+        string $dateStart, 
+        string $dateEnd, 
+        int $userId
+    ): array;
 }

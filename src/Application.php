@@ -1,16 +1,17 @@
 <?php
-/** 
- * Comentário de cabeçalho de arquivos
- * Esta classe de upload de fotos
+/**
+ * In this file, we are defining all the necessary information, 
+ * for connection to database.
+ * 
+ * PHP version 7.1
  *
- * @author     leo genilhu <leo@genilhu.com>
- * @version    0.1 
- * @copyright  GPL © 2006, genilhu ltda. 
- * @access     public  
- * @package    Infra_Estrutura 
- * @subpackage UploadGenilhu
- * @example    Classe uploadGenilhu. 
- */ 
+ * @category  Financial_Apllication
+ * @package   RTW_System
+ * @author    Ricardo Tobias <ricardosantostobias@yahoo.com.br>
+ * @copyright 2017 Ricardo Tobias Ltd
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @link      https://cryptic-hollows-97873.herokuapp.com Heroku Application
+ */
 
 declare(strict_types = 1);
 
@@ -22,6 +23,16 @@ use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\Response\RedirectResponse;
 
+/**
+ * Auth Class implementing AuthInterface
+ * 
+ * @category  Financial_Apllication
+ * @package   RTW_System
+ * @author    Ricardo Tobias <ricardosantostobias@yahoo.com.br>
+ * @copyright 2017 Ricardo Tobias Ltd
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
+ * @link      https://cryptic-hollows-97873.herokuapp.com Financial Application
+ */
 class Application
 {
 
@@ -32,72 +43,80 @@ class Application
      * @access private 
      * @name   $diretorio 
      */ 
-    private $serviceContainer;
+    private $_serviceContainer;
     private $_befores = [];
 
     /** 
      * Função para  gravar imagem em diretório
-     *
+     * 
+     * @param object $serviceContainer contain object from ServiceContainer
+     * 
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return object
      */ 
     public function __construct(ServiceContainerInterface $serviceContainer) 
     {
-        $this->serviceContainer = $serviceContainer;
+        $this->_serviceContainer = $serviceContainer;
     }
 
     /** 
      * Função para  gravar imagem em diretório
      *
-     * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * @param String $name Service name
+     * 
+     * @access public
+     * 
+     * @return string 
      */ 
     public function service($name) 
     {
-        return $this->serviceContainer->get($name);
+        return $this->_serviceContainer->get($name);
     }
 
     /** 
      * Função para  gravar imagem em diretório
      *
-     * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
+     * @param String $name    Service name
+     * @param String $service Service type
+     * 
+     * @access public
+     * 
      * @return void 
      */ 
     public function addService(string $name, $service): void 
     {
         if (is_callable($service)) {
-            $this->serviceContainer->addLazy($name, $service);
+            $this->_serviceContainer->addLazy($name, $service);
         } else {
-            $this->serviceContainer->add($name, $service);
+            $this->_serviceContainer->add($name, $service);
         }
     }
 
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $plugin Plugin object after added
+     * 
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return void | object
      */ 
     public function plugin(PluginInterface $plugin): void 
     {
-        $plugin->register($this->serviceContainer);
+        $plugin->register($this->_serviceContainer);
     }
 
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $path   Directory's path
+     * @param String $action Action
+     * @param String $name   Name
+     
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return array | object
      */ 
     public function get($path, $action, $name = null): Application 
     {
@@ -110,10 +129,13 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $path   Directory's path
+     * @param String $action Action
+     * @param String $name   Name
+     
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return array | object
      */ 
     public function post($path, $action, $name = null): Application 
     {
@@ -126,10 +148,11 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $path Directory's path
+     *
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return object
      */ 
     public function redirect($path) 
     {
@@ -139,10 +162,12 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $name   Directory's path
+     * @param Array  $params Params
+     
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return array | string
      */ 
     public function route(string $name, array $params = []) 
     {
@@ -154,10 +179,11 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
+     * @param String $callback Directory's path
+     *
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * 
+     * @return array | object
      */ 
     public function before(callable $callback): Application 
     {
@@ -167,12 +193,11 @@ class Application
 
     /** 
      * Função para  gravar imagem em diretório
-     *
+     *   
      * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
-     */ 
+     * 
+     * @return array | object
+     */  
     protected function runBefores(): ?ResponseInterface 
     {
         foreach ($this->_befores as $callback) {
@@ -187,17 +212,12 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
-     * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * @access public
+     * @return array | void
      */ 
     public function start(): void 
     {
         $route = $this->service('route');
-        /**
-         * @var ServerRequestInterface $request
-         */
         $request = $this->service(RequestInterface::class);
         if (!$route) {
             echo "Page not found";
@@ -219,10 +239,11 @@ class Application
     /** 
      * Função para  gravar imagem em diretório
      *
-     * @access public 
-     * @param  String $imagem_nome
-     * @param  String $diretorio
-     * @return void 
+     * @param Object $response Directory's path
+     *
+     * @access protected 
+     * 
+     * @return array | object
      */ 
     protected function emitResponse(ResponseInterface $response) 
     {

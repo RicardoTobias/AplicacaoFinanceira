@@ -26,7 +26,9 @@ use SONFin\Models\CategoryCost;
  * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GPL
  * @link      https://cryptic-hollows-97873.herokuapp.com Financial Application
  */
-class CategoryCostRepository extends DefaultRepository implements CategoryCostRepositoryInterface
+class CategoryCostRepository 
+extends DefaultRepository 
+implements CategoryCostRepositoryInterface
 {
 
     /**

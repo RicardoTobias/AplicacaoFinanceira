@@ -29,20 +29,13 @@ use Illuminate\Database\Eloquent\Model;
 class DefaultRepository implements RepositoryInterface
 {
 
-    /**
-     * @var string
-     */
     private $_modelClass;
-
-    /**
-     * @var Model
-     */
     private $_model;
 
     /**
      * DefaultRepository constructor.
      *
-     * @param string $modelClass
+     * @param string $modelClass a string var
      */
     public function __construct(string $modelClass) 
     {
@@ -50,11 +43,27 @@ class DefaultRepository implements RepositoryInterface
         $this->_model = new $modelClass;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function all(): array 
     {
         return $this->_model->all()->toArray();
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     * 
+     * @param array $data contain data
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function create(array $data) 
     {
         $this->_model->fill($data);
@@ -62,6 +71,16 @@ class DefaultRepository implements RepositoryInterface
         return $this->_model;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     
+     * @param int   $id   contain id
+     * @param array $data contain data
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function update($id, array $data) 
     {
         $model = $this->findInternal($id);
@@ -70,28 +89,75 @@ class DefaultRepository implements RepositoryInterface
         return $model;
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     
+     * @param int $id contain id
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function delete($id) 
     {
         $model = $this->findInternal($id);
         $model->delete();
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @param int $id contain id
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     protected function findInternal($id) 
     {
         return is_array($id) ? $this->findOneBy($id) : $this->find($id);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     
+     * @param int  $id             contain id
+     * @param bool $failIfNotExist contain bool: true or false
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function find(int $id, bool $failIfNotExist = true) 
     {
         return $failIfNotExist ? $this->_model->findOrFail($id) :
                 $this->_model->find($id);
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     
+     * @param string $field contain fild's name
+     * @param string $value contain value's name
+     * 
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function findByField(string $field, $value) 
     {
         return $this->_model->where($field, '=', $value)->get();
     }
 
+    /** 
+     * Função para  gravar imagem em diretório
+     
+     * @param int $search contain search data
+     *
+     * @access public 
+     * 
+     * @return array
+     */ 
     public function findOneBy(array $search) 
     {
         $queryBuilder = $this->_model;

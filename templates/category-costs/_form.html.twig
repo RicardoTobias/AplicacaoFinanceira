@@ -1,9 +1,9 @@
 <form class="form" method="post" action="{{ action }}">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="control-group">
-                <label class="control-label">Nome</label>
+                <label class="control-label">Categoria de custos (contas à receber)</label>
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-bookmark"></i>
@@ -12,9 +12,15 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-4">
+            <div class="control-group">
+                <label class="control-label">&nbsp;</label>
 
-    <button type="submit" class="btn btn-primary btn-block">
-        <span class="fa fa-{{ submitIcon }}"></span>
-    </button>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="fa fa-{{ submitIcon }}"></span>
+                </button>
+
+            </div>
+        </div>
+    </div>
 </form>

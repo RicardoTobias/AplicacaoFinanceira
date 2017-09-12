@@ -27,5 +27,16 @@ namespace SONFin\Repository;
 interface StatementRepositoryInterface
 {
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @param string $dateStart Start date
+     * @param string $dateEnd   End date
+     * @param int    $userId    User's id
+     * 
+     * @access public
+     * 
+     * @return string 
+     */ 
     public function all(string $dateStart, string $dateEnd, int $userId): array;
 }

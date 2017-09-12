@@ -1,8 +1,7 @@
 <?php
-
 /**
- * In this file, we are defining all the necessary information, 
- * for connection to database.
+ * This file, we are defining all the necessary information, 
+ * for connection to database. This file has dependency to another file .env.
  * 
  * PHP version 7.1
  *

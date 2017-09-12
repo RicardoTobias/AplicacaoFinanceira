@@ -27,6 +27,15 @@ namespace SONFin\Repository;
 class RepositoryFactory
 {
 
+    /** 
+     * Função para  gravar imagem em diretório
+     *
+     * @param String $modelClass Model name
+     * 
+     * @access public
+     * 
+     * @return object 
+     */ 
     public static function factory(string $modelClass) 
     {
         return new DefaultRepository($modelClass);
